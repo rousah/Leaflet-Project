@@ -40,6 +40,8 @@
     <!-- Plugin -->
     <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
 
+    <!-- GeoJSON -->
+    <script src="data/puntosLluvia.js"></script>
 </head>
 
 <body>
@@ -67,9 +69,6 @@
                 color: chroma.scale(['#FFD500', '#DB1003']).mode('rgb').domain(s.range)
             }).addTo(map);
 
-            // Hacemos zoom a la capa
-            map.fitBounds(layer.getBounds());
-
             // Asignamos la capa a su grupo correspondiente
             overlayMaps[nombre.toString()] = layer;
 
@@ -89,6 +88,13 @@
             });
         }
 
+        async function cargaShapefile(geojson) {
+            var layer = L.geoJSON(geojson)
+            console.log(layer.getBounds())
+            map.fitBounds(layer.getBounds())
+            overlayMaps["k"] = layer;
+        }
+
         async function crearMapa() {
             // Basemap watercolor
             var Basemap_Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
@@ -105,19 +111,39 @@
                 attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
             });
 
+            // Basemap terreno
+            var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 0,
+                maxZoom: 18,
+                ext: 'png'
+            });
+
+            // Basemap calles
+            var OpenMapSurfer_Roads = L.tileLayer('https://maps.heigit.org/openmapsurfer/tiles/roads/webmercator/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> | Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            });
+
             // Asignamos los basemap a su grupo correspondiente
-            baseMaps["Watercolor"] = Basemap_Stamen_Watercolor;
             baseMaps["Topográfico"] = OpenTopoMap;
+            baseMaps["Terreno"] = Stamen_TerrainBackground;
+            baseMaps["Calles"] = OpenMapSurfer_Roads;
+            baseMaps["Watercolor"] = Basemap_Stamen_Watercolor;
 
             // El mapa principal
             map = L.map('map', {
                 center: [40.4637, -3.7492],
                 zoom: 5,
-                layers: [Basemap_Stamen_Watercolor]
+                layers: [OpenTopoMap]
             });
 
             // Cargamos los GeoTIFF
             await cargaTiff("data/corine_incendio.tif", 'Incendio');
+
+            // Cargamos los shapefile geojson
+            await cargaShapefile(puntosLluvia);
 
             // Añadimos las capas al mapa
             anyadirCapas();
@@ -126,6 +152,13 @@
         function anyadirCapas() {
             // Añadimos los basemaps y overlays al mapa
             L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+            map.on('overlayadd', function (overlay) {
+                // Cogemos los bounds de la capa añadida
+                var bounds = overlay.layer.getBounds();
+                // Hacemos zoom al overlay
+                map.fitBounds(bounds);
+            })
         }
     </script>
 
