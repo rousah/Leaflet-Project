@@ -45,24 +45,13 @@
 <body>
     <div id="map" style="width: 600px; height: 400px;"></div>
     <script>
+        var map;
+        var baseMaps = {};
+        var overlayMaps = {};
+        // Creamos el mapa
+        crearMapa()
 
-        // El basemap (watercolor)
-        var Basemap_Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            subdomains: 'abcd',
-            minZoom: 1,
-            maxZoom: 16,
-            ext: 'jpg'
-        });
-
-        // El mapa principal
-        var map = L.map('map', {
-            center: [40.4637, -3.7492],
-            zoom: 5,
-            layers: [Basemap_Stamen_Watercolor]
-        });
-
-        async function cargaTiff(url) {
+        async function cargaTiff(url, nombre) {
             // Buscamos la url
             const response = await fetch(url);
 
@@ -81,6 +70,9 @@
             // Hacemos zoom a la capa
             map.fitBounds(layer.getBounds());
 
+            // Asignamos la capa a su grupo correspondiente
+            overlayMaps[nombre.toString()] = layer;
+
             // ON CLICK de un pixel del GeoTIFF
             layer.on('click', function (e) {
                 if (e.value !== null) {
@@ -97,8 +89,44 @@
             });
         }
 
-        // Cargamos el GeoTIFF
-        cargaTiff("data/corine_incendio.tif");
+        async function crearMapa() {
+            // Basemap watercolor
+            var Basemap_Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 1,
+                maxZoom: 16,
+                ext: 'jpg'
+            });
+
+            // Basemap topográfico
+            var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                maxZoom: 17,
+                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            });
+
+            // Asignamos los basemap a su grupo correspondiente
+            baseMaps["Watercolor"] = Basemap_Stamen_Watercolor;
+            baseMaps["Topográfico"] = OpenTopoMap;
+
+            // El mapa principal
+            map = L.map('map', {
+                center: [40.4637, -3.7492],
+                zoom: 5,
+                layers: [Basemap_Stamen_Watercolor]
+            });
+
+            // Cargamos los GeoTIFF
+            await cargaTiff("data/corine_incendio.tif", 'Incendio');
+
+            // Añadimos las capas al mapa
+            anyadirCapas();
+        }
+
+        function anyadirCapas() {
+            // Añadimos los basemaps y overlays al mapa
+            L.control.layers(baseMaps, overlayMaps).addTo(map);
+        }
     </script>
 
 </body>
