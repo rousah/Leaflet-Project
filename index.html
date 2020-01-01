@@ -88,11 +88,9 @@
             });
         }
 
-        async function cargaShapefile(geojson) {
+        async function cargaShapefile(geojson, nombre) {
             var layer = L.geoJSON(geojson)
-            console.log(layer.getBounds())
-            map.fitBounds(layer.getBounds())
-            overlayMaps["k"] = layer;
+            overlayMaps[nombre.toString()] = layer;
         }
 
         async function crearMapa() {
@@ -140,10 +138,10 @@
             });
 
             // Cargamos los GeoTIFF
-            await cargaTiff("data/corine_incendio.tif", 'Incendio');
+            await cargaTiff("data/corine_incendio.tif", "Incendio");
 
             // Cargamos los shapefile geojson
-            await cargaShapefile(puntosLluvia);
+            await cargaShapefile(puntosLluvia, "Lluvia");
 
             // Añadimos las capas al mapa
             anyadirCapas();
