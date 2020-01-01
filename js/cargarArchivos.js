@@ -7,12 +7,29 @@ async function cargaTiff(url, nombre) {
 
     // Creamos el scalarfield del arraybuffer
     var s = L.ScalarField.fromGeoTIFF(arrayBuffer);
-    console.log(s)
+    var options = {}
+    switch (nombre) {
+        case "Incendio":
+            options = {
+                // yellow red
+                color: chroma.scale(['#FFD500', '#DB1003']).mode('rgb').domain(s.range)
+            }
+            break;
+        case "Lluvia":
+            options = {
+                // blue
+                color: chroma.scale(['#89E9FF', '#0001FF']).mode('rgb').domain(s.range)
+            }
+            break;
+        case "dNBR septiembre 2018":
+            options = {
+                // blue
+                color: chroma.scale(['#89E9FF', '#0001FF']).mode('rgb').domain(s.range)
+            }
+            break;
+    }
     // Creamos la capa y la añadimos
-    var layer = L.canvasLayer.scalarField(s, {
-        // yellow red
-        color: chroma.scale(['#FFD500', '#DB1003']).mode('rgb').domain(s.range)
-    }).addTo(map);
+    var layer = L.canvasLayer.scalarField(s, options).addTo(map);
 
     // Asignamos la capa a su grupo correspondiente
     overlayMaps[nombre.toString()] = layer;
@@ -21,12 +38,23 @@ async function cargaTiff(url, nombre) {
     layer.on('click', function (e) {
         if (e.value !== null) {
             // Cogemos el valor
+            let html;
             let vector = e.value;
             var lat = e.latlng.lat;
             var long = e.latlng.lng;
             console.log(e)
             // Creamos el html
-            let html = (`<span><b>Severidad: </b>${vector}<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
+            switch (nombre) {
+                case "Incendio":
+                    html = (`<span><b>Severidad: </b>${vector.toFixed(2)}<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
+                    break;
+                case "Lluvia":
+                    html = (`<span><b>Nivel de lluvia: </b>${vector.toFixed(2)}<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
+                    break;
+                case "dNBR septiembre 2018":
+                    html = (`<span><b>dNBR: </b>${vector.toFixed(2)}<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
+                    break;
+            }
             // Creamos un popup
             let popup = L.popup()
                 .setLatLng(e.latlng)

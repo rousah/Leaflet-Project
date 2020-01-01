@@ -103,23 +103,21 @@
                 layers: [Esri_WorldTopoMap]
             });
 
+            // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
             await cargaTiff("data/corine_incendio.tif", "Incendio");
             await cargaTiff("data/interplacionlluviaextract.tif", "Lluvia");
-
-            // Cargamos los shapefile geojson
-            // await cargaShapefile(puntosLluvia, "Lluvia");
+            await cargaTiff("data/dnbr201809.tif", "dNBR septiembre 2018");
 
             // Cargamos los shapefile zips
             await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
             await cargaShapefileZip("data/puntoslluvia.zip", "Puntos lluvia")
             await cargaShapefileZip("data/solucionfinal.zip", "Repoblación")
 
-            // Añadimos las capas al mapa
-            anyadirCapas();
+            crearControlCapas();
         }
 
-        function anyadirCapas() {
+        function crearControlCapas() {
             // Añadimos los basemaps y overlays al mapa
             L.control.layers(baseMaps, overlayMaps).addTo(map);
 
