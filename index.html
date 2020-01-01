@@ -54,8 +54,21 @@
 
     <!-- Measure button  -->
     <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.1.0/dist/leaflet-measure.min.js"></script>
-    <link rel="stylesheet" href="css/leaflet-measure.css" integrity="" crossorigin=""/>
-    
+    <link rel="stylesheet" href="css/leaflet-measure.css" integrity="" crossorigin="" />
+
+    <!-- Locate button -->
+    <script
+        src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
+        rel='stylesheet' />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+
+    <!--[if lt IE 9]>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.ie.css' rel='stylesheet' />
+    <![endif]-->
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css'
+        rel='stylesheet' />
+
     <!-- Mis scripts -->
     <script src="js/cargarArchivos.js"></script>
 </head>
@@ -129,6 +142,9 @@
             }
             var measureControl = new L.Control.Measure(measureOptions);
             measureControl.addTo(map);
+
+            // Añadimos botón de encontrar mi localización
+            L.control.locate().addTo(map);
 
             // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
