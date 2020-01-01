@@ -42,6 +42,10 @@
 
     <!-- GeoJSON -->
     <script src="data/puntosLluvia.js"></script>
+
+    <!-- Shapefile -->
+    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+    <script src="js/leaflet.shpfile.js"></script>
 </head>
 
 <body>
@@ -88,9 +92,50 @@
             });
         }
 
-        async function cargaShapefile(geojson, nombre) {
+     /*   async function cargaShapefile(geojson, nombre) {
             var layer = L.geoJSON(geojson)
             overlayMaps[nombre.toString()] = layer;
+        }*/
+
+        async function cargaShapefileZip(url, nombre) {
+            options = {
+                style: function (feature) {
+                    // Min 0 max 1623
+                    return {
+                        fillColor: getColor(feature.properties.AREA_HA),
+                        weight: 1, // Grosor del borde
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '3',
+                        fillOpacity: 0.7
+                    };
+                }
+            }
+            var layer = L.shapefile(url, options)
+            overlayMaps[nombre.toString()] = layer;
+
+            // ON CLICK de un pixel del Shapefield
+            layer.on('click', function (e) {
+                if (e.value !== null) {
+                    // Cogemos el valor
+                    let tipo = e.layer.feature.properties.DESC_;
+                    let area = e.layer.feature.properties.AREA_HA;
+                    // Creamos el html
+                    let html = ('<h4>Tipo de vegetación:</h4>' + tipo + '<br/> <h4>Área:</h4> ' + area.toFixed(2) + 'ha')
+                    // Creamos un popup
+                    let popup = L.popup()
+                        .setLatLng(e.latlng)
+                        .setContent(html)
+                        .openOn(map);
+                }
+            });
+        }
+
+        function getColor(area) {
+            return area > 1500 ? '#225ea8' :
+                area > 700 ? '#41b6c4' :
+                    area > 100 ? '#a1dab4' :
+                        '#ffffcc';
         }
 
         async function crearMapa() {
@@ -141,7 +186,10 @@
             await cargaTiff("data/corine_incendio.tif", "Incendio");
 
             // Cargamos los shapefile geojson
-            await cargaShapefile(puntosLluvia, "Lluvia");
+           // await cargaShapefile(puntosLluvia, "Lluvia");
+
+            // Cargamos los shapefile zips
+            await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
 
             // Añadimos las capas al mapa
             anyadirCapas();
