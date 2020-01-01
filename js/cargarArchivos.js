@@ -100,9 +100,6 @@ async function cargaShapefileZip(url, nombre) {
                     fillOpacity: 0.7
                 };
             }
-            else {
-                console.log(feature)
-            }
         }
     }
     var layer = L.shapefile(url, options)
