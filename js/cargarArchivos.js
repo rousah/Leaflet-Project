@@ -95,7 +95,7 @@ async function cargaShapefileZip(url, nombre) {
             }
             else if (feature.properties.Cod_ccaa != null) {
                 return {
-                    fillColor: getColorVegetacion(feature.properties.Cod_ccaa),
+                    fillColor: getRandomColor(feature.properties.Cod_prov),
                     weight: 1, // Grosor del borde
                     opacity: 1,
                     color: 'white',
@@ -133,6 +133,7 @@ async function cargaShapefileZip(url, nombre) {
 
             // Para puntos de lluvia
             if (e.layer.feature.properties.Cod_ccaa != null) {
+                console.log(e.layer.feature.properties)
                 // Cogemos el valor
                 let nombre = e.layer.feature.properties.Nombre;
                 // Creamos el html
@@ -167,4 +168,8 @@ function getColorAptitud(aptitud) {
         case 14: return '#a1d99b'
         case 15: return '#31a354'
     }
+}
+
+function getRandomColor(valor) {
+    return chroma.random();
 }
