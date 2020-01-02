@@ -43,7 +43,6 @@ async function cargaTiff(url, nombre) {
             let vector = e.value;
             var lat = e.latlng.lat;
             var long = e.latlng.lng;
-            console.log(e)
             // Creamos el html
             switch (nombre) {
                 case "Temperaturas":
@@ -120,7 +119,7 @@ async function cargaShapefileZip(url, nombre) {
                 let tipo = e.layer.feature.properties.DESC_;
                 let area = e.layer.feature.properties.AREA_HA;
                 // Creamos el html
-                html = ('<h4>Tipo de vegetación:</h4>' + tipo + '<br/> <h4>Área:</h4> ' + area.toFixed(2) + 'ha')
+                html = ('<h6>Tipo de vegetación:</h6>' + tipo + '<br/> <h6>Área:</h6> ' + area.toFixed(2) + 'ha')
             }
 
             // Para repoblación del ayora
@@ -129,7 +128,15 @@ async function cargaShapefileZip(url, nombre) {
                 let aptitud = e.layer.feature.properties.Aptitud;
                 let area = e.layer.feature.properties.Area;
                 // Creamos el html
-                html = ('<h4>Aptitud:</h4>' + aptitud + '<br/> <h4>Área:</h4> ' + area + 'ha')
+                html = ('<h6>Aptitud:</h6>' + aptitud + '<br/> <h6>Área:</h6> ' + area + 'ha')
+            }
+
+            // Para puntos de lluvia
+            if (e.layer.feature.properties.Cod_ccaa != null) {
+                // Cogemos el valor
+                let nombre = e.layer.feature.properties.Nombre;
+                // Creamos el html
+                html = ('<h6>Nombre:</h6>' + nombre)
             }
 
             // Creamos un popup
