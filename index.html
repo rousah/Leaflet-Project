@@ -8,8 +8,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />
@@ -40,9 +45,6 @@
     <!-- Plugin -->
     <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
 
-    <!-- GeoJSON -->
-    <script src="data/puntosLluvia.js"></script>
-
     <!-- Shapefile -->
     <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
     <script src="js/leaflet.shpfile.js"></script>
@@ -61,8 +63,6 @@
         src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css'
         rel='stylesheet' />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
-
     <!--[if lt IE 9]>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.ie.css' rel='stylesheet' />
     <![endif]-->
@@ -72,9 +72,65 @@
     <!-- Mis scripts -->
     <script src="js/cargarArchivos.js"></script>
 </head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+        width: 100vw;
+    }
+
+    .legend {
+        line-height: 18px;
+        width: 150px;
+        color: #555;
+    }
+
+    .legend i {
+        width: 20px;
+        height: 18px;
+        float: left;
+        margin-right: 5px;
+        opacity: 0.7;
+    }
+
+    .info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+</style>
 
 <body>
-    <div id="map" style="width: 1200px; height: 800px;"></div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="map" class="" style="height: 100vh;"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card my-4 mr-4">
+                <h5 class="card-header">¡Bienvenido!</h5>
+                <div class="card-body">
+                    dshkhkahk
+                </div>
+            </div>
+            <div class="card my-4 mr-4">
+                <h5 class="card-header">Información adicional</h5>
+                <div class="card-body">
+                    <b>Emilia Rosa van der Heide</b><br>
+                    <b>Tecnologías de la Información Geográfica</b><br>
+                    <b>Grado en Tecnologías Interactivas</b><br>
+                    <small>Universidad Politénica de Valencia</small>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         var map;
         var baseMaps = {};
@@ -148,9 +204,10 @@
 
             // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
-            await cargaTiff("data/corine_incendio.tif", "Incendio");
             await cargaTiff("data/interplacionlluviaextract.tif", "Lluvia");
-            await cargaTiff("data/dnbr201809.tif", "dNBR septiembre 2018");
+            await cargaTiff("data/temperaturasinterpolacion.tif", "Temperaturas")
+            //await cargaTiff("data/dnbr201809.tif", "dNBR septiembre 2018");
+            await cargaTiff("data/corine_incendio.tif", "Incendio");
 
             // Cargamos los shapefile zips
             await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
@@ -171,9 +228,41 @@
 
                 // Si los bounds existen hacemos zoom al overlay
                 if (Object.keys(bounds).length > 0) map.fitBounds(bounds);
+
+                // Añadimos leyenda
+                var legend = L.control({ position: 'bottomright' });
+
+                if (overlay.name == "Vegetacion") {
+
+                    legend.onAdd = function (map) {
+                        var div = L.DomUtil.create('div', 'info legend'),
+                            grades = [0, 100, 700, 1500],
+                            labels = [];
+                        div.innerHTML = '<h6 class="text-center">Área</h6>'
+                        // loop through our density intervals and generate a label with a colored square for each interval
+                        for (var i = 0; i < grades.length; i++) {
+                            div.innerHTML +=
+                                '<div class="row"><div class="col-4 pr-0"><i style="background:' + getColorVegetacion(grades[i] + 1) + '" class=""></i></div> <span class="my-auto m-100 col-8 pl-0">' +
+                                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + 'ha</span></div>' : '+');
+                        }
+                        return div;
+                    };
+
+                    legend.addTo(map);
+                }
             })
         }
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 

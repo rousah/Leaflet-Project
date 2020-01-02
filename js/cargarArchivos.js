@@ -6,10 +6,12 @@ async function cargaTiff(url, nombre) {
     const arrayBuffer = await response.arrayBuffer();
 
     // Creamos el scalarfield del arraybuffer
+    console.log(L.ScalarField)
     var s = L.ScalarField.fromGeoTIFF(arrayBuffer);
     var options = {}
     switch (nombre) {
         case "Incendio":
+        case "Temperaturas":
             options = {
                 // yellow red
                 color: chroma.scale(['#FFD500', '#DB1003']).mode('rgb').domain(s.range)
@@ -45,6 +47,9 @@ async function cargaTiff(url, nombre) {
             console.log(e)
             // Creamos el html
             switch (nombre) {
+                case "Temperaturas":
+                    html = (`<span><b>Grados: </b>${vector.toFixed(2)}ºC<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
+                    break;
                 case "Incendio":
                     html = (`<span><b>Severidad: </b>${vector.toFixed(2)}<br><b>Posición:</b> ${lat.toFixed(4)}, ${long.toFixed(4)}</span>`);
                     break;
