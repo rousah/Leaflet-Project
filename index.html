@@ -133,6 +133,7 @@
     </div>
     <script>
         var map;
+        var legend;
         var baseMaps = {};
         var overlayMaps = {};
         // Creamos el mapa
@@ -218,8 +219,37 @@
         }
 
         function crearControlCapas() {
-            // Añadimos los basemaps y overlays al mapa
+
             L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+            L.Control.Custom = L.Control.Layers.extend({
+                onAdd: function () {
+                    this._addButton();
+                    return this._container;
+                },
+                _addButton: function () {
+                    // Añadimos texto al principio
+                    var elements = document.getElementsByClassName('leaflet-control-layers-list');
+                    var html = elements[0].innerHTML;
+                    elements[0].innerHTML = '<h6 class="bg-info text-white text-center p-1 rounded">Mapas base</h6>' + html;
+
+                    // Añadimos texto a la separacion Geotiff
+                    var elements2 = document.getElementsByClassName('leaflet-control-layers-overlays');
+                    var html2 = elements2[0].innerHTML;
+                    elements2[0].innerHTML = '<h6 class="bg-info text-white text-center p-1 rounded">Capas GEOTiff</h6>' + html2;
+
+                    // Añadimos texto a la separacion shape
+                    var elements3 = elements2[0].getElementsByTagName('label');
+                    console.log(elements3[0])
+                    var html3 = elements3[3].innerHTML;
+                    elements3[3].innerHTML = '<h6 class="bg-info text-white text-center p-1 rounded">Capas Shape</h6>' + html3;
+                }
+            })
+
+            //   var control = new L.Control.Custom(baseMaps, overlayMaps).addTo(map);
+
+            // Añadimos los basemaps y overlays al mapa
+            //    L.control.layers(baseMaps, overlayMaps).addTo(map);
 
             // Se activa cuando se añade una capa
             map.on('overlayadd', function (overlay) {
@@ -230,9 +260,8 @@
                 if (Object.keys(bounds).length > 0) map.fitBounds(bounds);
 
                 // Añadimos leyenda
-                var legend = L.control({ position: 'bottomright' });
-
                 if (overlay.name == "Vegetacion") {
+                    legend = L.control({ position: 'bottomright' });
 
                     legend.onAdd = function (map) {
                         var div = L.DomUtil.create('div', 'info legend'),
@@ -249,6 +278,17 @@
                     };
 
                     legend.addTo(map);
+                }
+                else {
+                    map.removeControl(legend)
+                }
+            })
+
+            // Se activa cuando se borra una capa
+            map.on('overlayremove', function (overlay) {
+                // Quitamos leyenda
+                if (overlay.name == "Vegetacion") {
+                    map.removeControl(legend)
                 }
             })
         }

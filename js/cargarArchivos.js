@@ -6,7 +6,6 @@ async function cargaTiff(url, nombre) {
     const arrayBuffer = await response.arrayBuffer();
 
     // Creamos el scalarfield del arraybuffer
-    console.log(L.ScalarField)
     var s = L.ScalarField.fromGeoTIFF(arrayBuffer);
     var options = {}
     switch (nombre) {
