@@ -133,7 +133,6 @@ async function cargaShapefileZip(url, nombre) {
 
             // Para puntos de lluvia
             if (e.layer.feature.properties.Cod_ccaa != null) {
-                console.log(e.layer.feature.properties)
                 // Cogemos el valor
                 let nombre = e.layer.feature.properties.Nombre;
                 // Creamos el html
