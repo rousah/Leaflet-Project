@@ -242,6 +242,7 @@
             // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
             await cargaTiff("data/interplacionlluviaextract.tif", "Lluvia");
+            overlayMaps["Lluvia"].addTo(map)
             await cargaTiff("data/temperaturasinterpolacion.tif", "Temperaturas")
             //await cargaTiff("data/dnbr201809.tif", "dNBR septiembre 2018");
             await cargaTiff("data/corine_incendio.tif", "Incendio");

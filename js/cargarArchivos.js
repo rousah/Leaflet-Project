@@ -29,8 +29,8 @@ async function cargaTiff(url, nombre) {
             }
             break;
     }
-    // Creamos la capa y la añadimos
-    var layer = L.canvasLayer.scalarField(s, options).addTo(map);
+    // Creamos la capa
+    var layer = L.canvasLayer.scalarField(s, options)
 
     // Asignamos la capa a su grupo correspondiente
     overlayMaps[nombre.toString()] = layer;
