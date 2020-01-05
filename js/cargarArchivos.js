@@ -80,7 +80,7 @@ async function cargaShapefileZip(url, nombre) {
                     opacity: 1,
                     color: 'white',
                     dashArray: '3',
-                    fillOpacity: 0.7
+                    fillOpacity: 0.8
                 };
             }
             // Para la aptitud de repoblación
@@ -156,10 +156,11 @@ async function cargaShapefileZip(url, nombre) {
 
 
 function getColorVegetacion(area) {
-    return area > 1500 ? '#225ea8' :
-        area > 700 ? '#41b6c4' :
-            area > 100 ? '#a1dab4' :
-                '#ffffcc';
+    return area > 400 ? '#253494' :
+        area > 300 ? '#2c7fb8' :
+            area > 200 ? '#41b6c4' :
+                area > 100 ? '#a1dab4' :
+                    '#ffffcc';
 }
 
 function getColorAptitud(aptitud) {
