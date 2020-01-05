@@ -141,7 +141,7 @@
                         - Los puntos de Lluvia <br>
                         - La aptitud para la repoblación de vegetación de Ayora. <br><br>
 
-                        Hay varios mapas base disponibles.
+                        Hay varios mapas base disponibles en el selector de capas arriba a la derecha.
                     </p>
                 </div>
             </div>
@@ -235,6 +235,9 @@
             var osmAttrib = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
             var osm2 = new L.TileLayer(osmUrl, { minZoom: 0, maxZoom: 13, attribution: osmAttrib });
             var miniMap = new L.Control.MiniMap(osm2, { toggleDisplay: true }).addTo(map);
+
+            // Añadimos botón de encontrar mi localización
+            L.control.locate().addTo(map);
 
             // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
