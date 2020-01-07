@@ -200,6 +200,17 @@ async function cargaShapefileZip(url, nombre) {
        overlayMaps[nombre.toString()] = layer;
    }*/
 
+async function leerKML(url, name) {
+    // Load kml file
+    const response = await fetch(url);
+    const text = await response.text();
+    const parser = new DOMParser();
+    const kml = parser.parseFromString(text, 'text/xml');
+    const track = new L.KML(kml);
+    console.log(track)
+    overlayMaps[name] = track;
+}
+
 
 function getColorVegetacion(area) {
     return area > 400 ? '#253494' :

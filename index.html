@@ -72,12 +72,14 @@
     <!-- Minimap 
     <link rel="stylesheet" href="Plugins/L.Control.MousePosition.css" /> -->
     <link rel="stylesheet" href="css/Control.MiniMap.css" />
-  <!--  <script src="Plugins/L.Control.MousePosition.js" type="text/javascript"></script> -->
     <script src="js/Control.MiniMap.js" type="text/javascript"></script>
 
     <!-- Print -->
     <script src="https://cdn.jsdelivr.net/npm/leaflet.browser.print@1.0.2/dist/leaflet.browser.print.min.js"></script>
-    
+
+    <!-- KML -->
+    <script src="js/L.KML.min.js"></script>
+
     <!-- Mis scripts -->
     <script src="js/cargarArchivos.js"></script>
 </head>
@@ -136,13 +138,15 @@
                         - Las temperaturas medias (interpoladas) de junio de 2007 <br>
                         - La severidad del incendio de Marxuquera <br> <br>
 
-                        Tenemos 4 capas vectoriales: <br>
+                        Tenemos 6 capas vectoriales: <br>
                         - El tipo de vegetación de Marxuquera <br>
                         - Área y perímetro de algunas zonas de Marxuquera (combinación)<br>
                         - Contornos <br>
                         - Provincias lluvia
                         - Los puntos de Lluvia <br>
                         - La aptitud para la repoblación de vegetación de Ayora. <br><br>
+
+                        - Tenemos una ruta KML con información en los waypoints (clicando los markers).
 
                         Hay varios mapas base disponibles en el selector de capas arriba a la derecha.
                     </p>
@@ -153,8 +157,8 @@
                 <div class="card-body">
                     Hecho por: <b>Emilia Rosa van der Heide</b><br>
                     <small>Tecnologías de la Información Geográfica<br>
-                    Grado en Tecnologías Interactivas<br>
-                    <b>Universidad Politénica de Valencia</b></small>
+                        Grado en Tecnologías Interactivas<br>
+                        <b>Universidad Politénica de Valencia</b></small>
                 </div>
             </div>
         </div>
@@ -258,12 +262,14 @@
             await cargaShapefileZip("data/puntos.zip", "Puntos lluvia")
             await cargaShapefileZip("data/solucionfinal.zip", "Repoblación")
 
+            await leerKML("data/KML.kml", "Ruta KML")
+
             crearControlCapas();
         }
 
         function crearControlCapas() {
 
-            L.control.layers(baseMaps, overlayMaps).addTo(map);
+            var control = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
             L.Control.Custom = L.Control.Layers.extend({
                 onAdd: function () {

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Emilia Rosa van der Heide KML.kml</name>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff00ce00</color>
+			<width>6</width>
+		</LineStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff00ce00</color>
+			<width>6</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000aa</color>
+			<width>6</width>
+		</LineStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000aa</color>
+			<width>6</width>
+		</LineStyle>
+	</Style>
+	<Folder>
+		<name>Sitios temporales</name>
+		<open>1</open>
+		<Placemark>
+			<name>Ruta buena</name>
+			<styleUrl>#msn_ylw-pushpin0</styleUrl>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-0.1656210244932821,38.99482481266918,0 -0.1656341528481353,38.99477844405301,0 -0.165300748445939,38.99516115860686,0 -0.1639848456223925,38.99486685022045,0 -0.1637483658387673,38.99504367470275,0 -0.1633396232527395,38.9950318965228,0 -0.1621039969383231,38.99556107262902,0 -0.1620276230908269,38.99545233073896,0 -0.159149766933987,38.99690122387705,0 -0.1582811947515794,38.99564724733878,0 -0.158412184704414,38.9954009914589,0 -0.1606903140328153,38.99448674904884,0 -0.1609340490353062,38.99416672425038,0 -0.1610854489563862,38.99410449227166,0 -0.161174014925235,38.99423596356484,0 -0.1619381566109723,38.99424055365417,0 -0.1625789866896743,38.9940439762203,0 -0.1632415958378441,38.99357896234256,0 -0.1635700286185959,38.99344479697867,0 -0.1650587396066405,38.99362073492585,0 -0.1655107578902837,38.9939589803793,0 -0.16591259927632,38.99442382868619,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Document>
+			<name>4326</name>
+			<open>1</open>
+			<snippet>Created ma. oct. 15 13:34:59 2019</snippet>
+			<LookAt>
+				<gx:TimeSpan>
+					<begin>2019-10-01T11:42:40Z</begin>
+					<end>2019-10-01T12:05:28Z</end>
+				</gx:TimeSpan>
+				<longitude>-0.162121</longitude>
+				<latitude>38.995109</latitude>
+				<altitude>0</altitude>
+				<heading>0</heading>
+				<tilt>0</tilt>
+				<range>1300</range>
+			</LookAt>
+			<StyleMap id="msn_grn-blank">
+				<Pair>
+					<key>normal</key>
+					<styleUrl>#sn_grn-blank</styleUrl>
+				</Pair>
+				<Pair>
+					<key>highlight</key>
+					<styleUrl>#sh_grn-blank</styleUrl>
+				</Pair>
+			</StyleMap>
+			<Style id="sn_grn-blank">
+				<IconStyle>
+					<scale>1.1</scale>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+					</Icon>
+					<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+				</IconStyle>
+				<BalloonStyle>
+				</BalloonStyle>
+				<ListStyle>
+					<ItemIcon>
+						<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+					</ItemIcon>
+				</ListStyle>
+			</Style>
+			<Style id="sh_grn-blank">
+				<IconStyle>
+					<scale>1.3</scale>
+					<Icon>
+						<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank.png</href>
+					</Icon>
+					<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+				</IconStyle>
+				<BalloonStyle>
+				</BalloonStyle>
+				<ListStyle>
+					<ItemIcon>
+						<href>http://maps.google.com/mapfiles/kml/paddle/grn-blank-lv.png</href>
+					</ItemIcon>
+				</ListStyle>
+			</Style>
+			<Folder>
+				<name>Waypoints</name>
+				<Placemark>
+					<name>Biblioteca UPV</name>
+					<description><![CDATA[<a href="http://www.upv.es/">http://www.upv.es/</a>
+<p>
+Biblioteca de la UPV EPSG
+<img src=https://www.ondanaranjacope.com/noticias/oldimages/foto15060_1.jpg"  width = "300">
+<p>
+<Font color = "#3366FF" >
+Coordenadas de situación:  38°59'41.38"N    0° 9'56.27"O </Font>]]></description>
+					<TimeStamp><when>2019-10-01T11:42:40Z</when>
+</TimeStamp>
+					<styleUrl>#msn_grn-blank</styleUrl>
+					<Point>
+						<coordinates>-0.1656305555555556,38.99482777777778,23.62</coordinates>
+					</Point>
+				</Placemark>
+				<Placemark>
+					<name>Farmacia</name>
+					<description><![CDATA[<a href="http://www.farmaciadelpaseo.es/">http://www.farmaciadelpaseo.es/</a>
+<p>
+Farmacia de la playa de gandia
+<img src="http://www.farmaciadelpaseo.es/images/Equipo_farmacia_del_paseo_24h_gandia.jpg"  width = "300">
+<p>
+<Font color = "#3366FF" >
+Coordenadas de situación:  38°59'43.24"N   0° 9'45.69"O </Font>]]></description>
+					<TimeStamp><when>2019-10-01T11:46:22Z</when>
+</TimeStamp>
+					<styleUrl>#msn_grn-blank</styleUrl>
+					<Point>
+						<coordinates>-0.1626916666666667,38.99534444444445,0.55</coordinates>
+					</Point>
+				</Placemark>
+				<Placemark>
+					<name>Hotel Clibomar
+</name>
+					<description><![CDATA[<a href="https://www.booking.com/hotel/es/clibomar.es.html">https://www.booking.com/hotel/es/clibomar.es.html/</a>
+<p>
+Hotel en la playa de gandia
+<img src="https://x.cdrst.com/foto/hotel-sf/1ff2b/granderesp/hotel-clibomar-general-16d07f3.jpg"  width = "300">
+<p>
+<Font color = "#3366FF" >
+Coordenadas de situación:  38°59'47.61"N     0° 9'35.51"O </Font>]]></description>
+					<TimeStamp><when>2019-10-01T11:50:00Z</when>
+</TimeStamp>
+					<styleUrl>#msn_grn-blank</styleUrl>
+					<Point>
+						<coordinates>-0.1598638888888889,38.99655833333333,1.33</coordinates>
+					</Point>
+				</Placemark>
+				<Placemark>
+					<name>Puerto de Gandia</name>
+					<description><![CDATA[<a href="https://www.valenciaport.com/autoridad-portuaria/infraestructuras/terminales-e-instalaciones/puerto-de-gandia/l">https://www.valenciaport.com/autoridad-portuaria/infraestructuras/terminales-e-instalaciones/puerto-de-gandia/
+</a>
+<p>
+Puerto de la playa de gandia
+<img src="http://www.canaryports.es/multimedia/images/1921318.jpg"  width = "300">
+<p>
+<Font color = "#3366FF" >
+Coordenadas de situación:    38°59'41.49"N     0° 9'35.47"O </Font>]]></description>
+					<TimeStamp><when>2019-10-01T11:57:37Z</when>
+</TimeStamp>
+					<styleUrl>#msn_grn-blank</styleUrl>
+					<Point>
+						<coordinates>-0.1598527777777778,38.99485833333333,0.74</coordinates>
+					</Point>
+				</Placemark>
+				<Placemark>
+					<name>Llometes</name>
+					<description><![CDATA[<a href="https://casas.trovit.es/residencial-llometes-gandial">https://casas.trovit.es/residencial-llometes-gandia</a>
+<p>
+Urbanización Les Llometes
+<img src=http://sistemasrv.com/wp-content/uploads/2016/06/Les-Llometes.jpg"  width = "300">
+<p>
+<Font color = "#3366FF" >
+
+Coordenadas de situación:   38°59'37.18"N     0° 9'53.88"O </Font>]]></description>
+					<TimeStamp><when>2019-10-01T12:04:02Z</when>
+</TimeStamp>
+					<styleUrl>#msn_grn-blank</styleUrl>
+					<Point>
+						<coordinates>-0.1649666666666667,38.99366111111111,-2.18</coordinates>
+					</Point>
+				</Placemark>
+			</Folder>
+		</Document>
+		<gx:Tour>
+			<name>Vuelo sobre la rutica</name>
+			<gx:Playlist>
+				<gx:FlyTo>
+					<gx:duration>7</gx:duration>
+					<LookAt>
+						<longitude>-0.1656210244932821</longitude>
+						<latitude>38.99482481266918</latitude>
+						<altitude>0</altitude>
+						<heading>81.94808197021484</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1637687239030717</longitude>
+						<latitude>38.99502845224218</latitude>
+						<altitude>0</altitude>
+						<heading>70.32350158691406</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1617616709576893</longitude>
+						<latitude>38.9955862277094</latitude>
+						<altitude>0</altitude>
+						<heading>57.06423950195313</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1598104122923576</longitude>
+						<latitude>38.99656861360249</latitude>
+						<altitude>0</altitude>
+						<heading>102.0642395019531</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1584194461656887</longitude>
+						<latitude>38.99584684391024</latitude>
+						<altitude>0</altitude>
+						<heading>147.0642395019531</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3.000000000000001</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1599147941108875</longitude>
+						<latitude>38.99479797510332</latitude>
+						<altitude>0</altitude>
+						<heading>192.0642395019531</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1617854929770415</longitude>
+						<latitude>38.99423963662566</latitude>
+						<altitude>0</altitude>
+						<heading>237.0642395019531</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1637865269888824</longitude>
+						<latitude>38.99347038305894</latitude>
+						<altitude>0</altitude>
+						<heading>282.0642395019531</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>3</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.1657395285171049</longitude>
+						<latitude>38.99422362121083</latitude>
+						<altitude>0</altitude>
+						<heading>326.1043395996094</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+				<gx:FlyTo>
+					<gx:duration>0.3998268327824377</gx:duration>
+					<gx:flyToMode>smooth</gx:flyToMode>
+					<LookAt>
+						<longitude>-0.16591259927632</longitude>
+						<latitude>38.99442382868619</latitude>
+						<altitude>0</altitude>
+						<heading>326.1043395996094</heading>
+						<tilt>68.7</tilt>
+						<range>76.8</range>
+					</LookAt>
+				</gx:FlyTo>
+			</gx:Playlist>
+		</gx:Tour>
+	</Folder>
+</Document>
+</kml>
