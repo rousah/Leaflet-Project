@@ -140,7 +140,7 @@ async function cargaShapefileZip(url, nombre, group) {
     layer.on('click', function (e) {
         if (e.value !== null) {
             let html;
-
+            console.log(e.layer.feature.properties)
             // Para el corine incendio tipos de vegetacion
             if (e.layer.feature.properties.DESC_ != null) {
                 // Cogemos el valor
@@ -167,8 +167,8 @@ async function cargaShapefileZip(url, nombre, group) {
                 html = ('<h6>Nombre:</h6>' + nombre)
             }
 
-            // Para com
-            if (e.layer.feature.properties.Area != null) {
+            // Para combinacion
+           if (e.layer.feature.properties.Perimetro != null) {
                 // Cogemos el valor
                 let area = e.layer.feature.properties.Area;
                 let perimetro = e.layer.feature.properties.Perimetro;
@@ -213,7 +213,9 @@ async function leerKML(url, name) {
     const parser = new DOMParser();
     const kml = parser.parseFromString(text, 'text/xml');
     const track = new L.KML(kml);
-    overlayMaps[name] = track;
+    overlayMaps.filter((obj) => {
+        return obj.groupName == "Ruta";
+    })[0].layers[name.toString()] = track;
 }
 
 
