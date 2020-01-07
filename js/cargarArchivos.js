@@ -71,6 +71,9 @@ async function cargaTiff(url, nombre) {
 async function cargaShapefileZip(url, nombre) {
     options = {
         style: function (feature) {
+            if (nombre == "idk") {
+                console.log(feature.properties)
+            }
             // Para el corine incendio tipos de vegetacion
             if (feature.properties.DESC_ != null) {
                 // Min 0 max 1623
@@ -96,6 +99,16 @@ async function cargaShapefileZip(url, nombre) {
             else if (feature.properties.Cod_ccaa != null) {
                 return {
                     fillColor: getRandomColor(feature.properties.Cod_prov),
+                    weight: 1, // Grosor del borde
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.7
+                };
+            }
+            else if (feature.properties.Area != null) {
+                return {
+                    fillColor: getRandomColor(feature.properties.Area),
                     weight: 1, // Grosor del borde
                     opacity: 1,
                     color: 'white',
@@ -137,6 +150,15 @@ async function cargaShapefileZip(url, nombre) {
                 let nombre = e.layer.feature.properties.Nombre;
                 // Creamos el html
                 html = ('<h6>Nombre:</h6>' + nombre)
+            }
+
+             // Para puntos de lluvia
+             if (e.layer.feature.properties.Area != null) {
+                // Cogemos el valor
+                let area = e.layer.feature.properties.Area;
+                let perimetro = e.layer.feature.properties.Perimetro;
+                // Creamos el html
+                html = ('<h6>Área:</h6>' + area + '<br><h6>Perímetro:</h6>' + perimetro)
             }
 
             // Creamos un popup

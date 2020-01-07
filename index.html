@@ -136,8 +136,9 @@
                         - Las temperaturas medias (interpoladas) de junio de 2018 <br>
                         - La severidad del incendio de Marxuquera <br> <br>
 
-                        Tenemos 3 capas vectoriales: <br>
+                        Tenemos 4 capas vectoriales: <br>
                         - El tipo de vegetación de Marxuquera <br>
+                        - Área y perímetro de algunas zonas de Marxuquera (combinación)<br>
                         - Los puntos de Lluvia <br>
                         - La aptitud para la repoblación de vegetación de Ayora. <br><br>
 
@@ -249,6 +250,7 @@
 
             // Cargamos los shapefile zips
             await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
+            await cargaShapefileZip("data/combinacion.zip", "Combinación")
             await cargaShapefileZip("data/puntoslluvia.zip", "Puntos lluvia")
             await cargaShapefileZip("data/solucionfinal.zip", "Repoblación")
 
