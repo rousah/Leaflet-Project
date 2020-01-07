@@ -80,6 +80,10 @@
     <!-- KML -->
     <script src="js/L.KML.min.js"></script>
 
+    <!-- Styled control layers -->
+    <link rel="stylesheet" href="http://davicustodio.github.io/Leaflet.StyledLayerControl/css/styledLayerControl.css" />
+    <script src="http://davicustodio.github.io/Leaflet.StyledLayerControl/src/styledLayerControl.js"></script>
+
     <!-- Mis scripts -->
     <script src="js/cargarArchivos.js"></script>
 </head>
@@ -116,6 +120,15 @@
         background: rgba(255, 255, 255, 0.8);
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
+    }
+
+    #map input {
+        margin-left: 5px;
+        padding-bottom: 2px;
+    }
+
+    #map article {
+        padding-bottom: 5px;
     }
 </style>
 
@@ -166,8 +179,36 @@
     <script>
         var map;
         var legend;
-        var baseMaps = {};
-        var overlayMaps = {};
+        var baseMaps = [
+            {
+                groupName: "Base Maps",
+                expanded: true,
+                layers: {}
+            }
+        ];
+        var overlayMaps = [
+            {
+                groupName: "Precipitaciones",
+                expanded: true,
+                layers: {}
+            }, {
+                groupName: "Temperaturas",
+                expanded: true,
+                layers: {}
+            }, {
+                groupName: "Incendio",
+                expanded: true,
+                layers: {}
+            }, {
+                groupName: "KML",
+                expanded: true,
+                layers: {}
+            }, {
+                groupName: "dNBR",
+                expanded: true,
+                layers: {}
+            }
+        ];
         // Creamos el mapa
         crearMapa()
 
@@ -202,10 +243,10 @@
             });
 
             // Asignamos los basemap a su grupo correspondiente
-            baseMaps["Topográfico"] = Esri_WorldTopoMap;
-            baseMaps["Terreno"] = Stamen_TerrainBackground;
-            baseMaps["Calles"] = OpenMapSurfer_Roads;
-            baseMaps["Watercolor"] = Basemap_Stamen_Watercolor;
+            baseMaps[0].layers["Topográfico"] = Esri_WorldTopoMap;
+            baseMaps[0].layers["Terreno"] = Stamen_TerrainBackground;
+            baseMaps[0].layers["Calles"] = OpenMapSurfer_Roads;
+            baseMaps[0].layers["Watercolor"] = Basemap_Stamen_Watercolor;
 
             // El mapa principal
             map = L.map('map', {
@@ -248,28 +289,38 @@
 
             // Añadimos las capas al mapa
             // Cargamos los GeoTIFF
-            await cargaTiff("data/interplacionlluviaextract.tif", "Lluvia");
-            overlayMaps["Lluvia"].addTo(map)
-            await cargaTiff("data/temperaturasinterpolacion.tif", "Temperaturas")
+            await cargaTiff("data/interplacionlluviaextract.tif", "Lluvia", "Precipitaciones");
+            // overlayMaps["Lluvia"].addTo(map)
+            await cargaTiff("data/temperaturasinterpolacion.tif", "Temperaturas", "Temperaturas")
             //await cargaTiff("data/dnbr201809.tif", "dNBR septiembre 2018");
-            await cargaTiff("data/corine_incendio.tif", "Incendio");
+            // await cargaTiff("data/corine_incendio.tif", "Incendio");
 
             // Cargamos los shapefile zips
-            await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
-            await cargaShapefileZip("data/combinacion.zip", "Combinación")
-            await cargaShapefileZip("data/contornos.zip", "Contornos")
-            await cargaShapefileZip("data/puntoslluvia.zip", "Provincias lluvia")
-            await cargaShapefileZip("data/puntos.zip", "Puntos lluvia")
-            await cargaShapefileZip("data/solucionfinal.zip", "Repoblación")
+            await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion", "Incendio")
+            await cargaShapefileZip("data/combinacion.zip", "Combinación", "Incendio")
+            await cargaShapefileZip("data/contornos.zip", "Contornos", "Precipitaciones")
+            await cargaShapefileZip("data/puntoslluvia.zip", "Provincias lluvia", "Precipitaciones")
+            await cargaShapefileZip("data/puntos.zip", "Puntos lluvia", "Precipitaciones")
+            await cargaShapefileZip("data/solucionfinal.zip", "Repoblación", "dNBR")
 
-            await leerKML("data/KML.kml", "Ruta KML")
+            await leerKML("data/KML.kml", "Ruta KML", "KML")
 
             crearControlCapas();
         }
 
         function crearControlCapas() {
 
-            var control = L.control.layers(baseMaps, overlayMaps).addTo(map);
+            //  var control = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+            var options = {
+                container_width: "250px",
+                /*container_maxHeight: "350px",
+                group_maxHeight: "80px",
+                exclusive: false*/
+            };
+
+            var control = L.Control.styledLayerControl(baseMaps, overlayMaps, options);
+            map.addControl(control);
 
             L.Control.Custom = L.Control.Layers.extend({
                 onAdd: function () {

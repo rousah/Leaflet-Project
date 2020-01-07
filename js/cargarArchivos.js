@@ -1,4 +1,4 @@
-async function cargaTiff(url, nombre) {
+async function cargaTiff(url, nombre, group) {
     // Buscamos la url
     const response = await fetch(url);
 
@@ -32,8 +32,18 @@ async function cargaTiff(url, nombre) {
     // Creamos la capa
     var layer = L.canvasLayer.scalarField(s, options)
 
+    var i;
     // Asignamos la capa a su grupo correspondiente
-    overlayMaps[nombre.toString()] = layer;
+    overlayMaps.filter((obj) => {
+        return obj.groupName == group;
+    })[0].layers[nombre.toString()] = layer;
+
+    console.log(overlayMaps.filter((obj) => {
+        return obj.groupName == group;
+    })[0].layers
+    )
+    /*    overlayMaps[0].layers["Topográfico"]
+        overlayMaps[nombre.toString()] = layer;*/
 
     // ON CLICK de un pixel del GeoTIFF
     layer.on('click', function (e) {
@@ -68,7 +78,7 @@ async function cargaTiff(url, nombre) {
 }
 
 
-async function cargaShapefileZip(url, nombre) {
+async function cargaShapefileZip(url, nombre, group) {
     options = {
         style: function (feature) {
             if (nombre == "idk") {
@@ -128,7 +138,10 @@ async function cargaShapefileZip(url, nombre) {
         }
     }
     var layer = L.shapefile(url, options)
-    overlayMaps[nombre.toString()] = layer;
+    overlayMaps.filter((obj) => {
+        return obj.groupName == group;
+    })[0].layers[nombre.toString()] = layer;
+  //  overlayMaps[nombre.toString()] = layer;
 
     // ON CLICK de un pixel del Shapefield
     layer.on('click', function (e) {
