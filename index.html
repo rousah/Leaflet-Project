@@ -132,13 +132,15 @@
                         para observar la información.)<br><br>
 
                         Tenemos 3 capas raster: <br>
-                        - Las precipitaciones de diciembre en 2018 <br>
-                        - Las temperaturas medias (interpoladas) de junio de 2018 <br>
+                        - Las precipitaciones de junio de 2007 <br>
+                        - Las temperaturas medias (interpoladas) de junio de 2007 <br>
                         - La severidad del incendio de Marxuquera <br> <br>
 
                         Tenemos 4 capas vectoriales: <br>
                         - El tipo de vegetación de Marxuquera <br>
                         - Área y perímetro de algunas zonas de Marxuquera (combinación)<br>
+                        - Contornos <br>
+                        - Provincias lluvia
                         - Los puntos de Lluvia <br>
                         - La aptitud para la repoblación de vegetación de Ayora. <br><br>
 
@@ -251,7 +253,9 @@
             // Cargamos los shapefile zips
             await cargaShapefileZip("data/corine-incendio.zip", "Vegetacion")
             await cargaShapefileZip("data/combinacion.zip", "Combinación")
-            await cargaShapefileZip("data/puntoslluvia.zip", "Puntos lluvia")
+            await cargaShapefileZip("data/contornos.zip", "Contornos")
+            await cargaShapefileZip("data/puntoslluvia.zip", "Provincias lluvia")
+            await cargaShapefileZip("data/puntos.zip", "Puntos lluvia")
             await cargaShapefileZip("data/solucionfinal.zip", "Repoblación")
 
             crearControlCapas();

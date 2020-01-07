@@ -116,6 +116,15 @@ async function cargaShapefileZip(url, nombre) {
                     fillOpacity: 0.7
                 };
             }
+            else if (feature.properties.CONTOUR != null) {
+                return {
+                    weight: 1, // Grosor del borde
+                    opacity: 1,
+                    weight: 3,
+                    color: getRandomColor(feature.properties.CONTOUR),
+                    fillOpacity: 1
+                };
+            }
         }
     }
     var layer = L.shapefile(url, options)
@@ -152,13 +161,29 @@ async function cargaShapefileZip(url, nombre) {
                 html = ('<h6>Nombre:</h6>' + nombre)
             }
 
-             // Para puntos de lluvia
-             if (e.layer.feature.properties.Area != null) {
+            // Para com
+            if (e.layer.feature.properties.Area != null) {
                 // Cogemos el valor
                 let area = e.layer.feature.properties.Area;
                 let perimetro = e.layer.feature.properties.Perimetro;
                 // Creamos el html
                 html = ('<h6>Área:</h6>' + area + '<br><h6>Perímetro:</h6>' + perimetro)
+            }
+
+            // Para contornos
+            if (e.layer.feature.properties.CONTOUR != null) {
+                // Cogemos el valor
+                let contour = e.layer.feature.properties.CONTOUR;
+                // Creamos el html
+                html = ('<h6>Contorno:</h6>' + contour)
+            }
+
+            // Para ptos lluvia
+            if (e.layer.feature.properties.JUN != null) {
+                // Cogemos el valor
+                let contour = e.layer.feature.properties.JUN;
+                // Creamos el html
+                html = ('<h6>Valor:</h6>' + contour)
             }
 
             // Creamos un popup
