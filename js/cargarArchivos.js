@@ -38,10 +38,6 @@ async function cargaTiff(url, nombre, group) {
         return obj.groupName == group;
     })[0].layers[nombre.toString()] = layer;
 
-    console.log(overlayMaps.filter((obj) => {
-        return obj.groupName == group;
-    })[0].layers
-    )
     /*    overlayMaps[0].layers["Topográfico"]
         overlayMaps[nombre.toString()] = layer;*/
 
@@ -81,9 +77,6 @@ async function cargaTiff(url, nombre, group) {
 async function cargaShapefileZip(url, nombre, group) {
     options = {
         style: function (feature) {
-            if (nombre == "idk") {
-                console.log(feature.properties)
-            }
             // Para el corine incendio tipos de vegetacion
             if (feature.properties.DESC_ != null) {
                 // Min 0 max 1623
@@ -220,7 +213,6 @@ async function leerKML(url, name) {
     const parser = new DOMParser();
     const kml = parser.parseFromString(text, 'text/xml');
     const track = new L.KML(kml);
-    console.log(track)
     overlayMaps[name] = track;
 }
 
